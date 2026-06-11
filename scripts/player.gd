@@ -4,6 +4,7 @@ var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
 var health = 100
 var player_is_alive = true
+var can_take_damage = true
 
 var attack_ip = false
 
@@ -18,6 +19,7 @@ func _physics_process(delta):
 	player_movement(delta)
 	enemy_attack()
 	attack()
+	current_camera()
 	
 	if health<=0:
 		player_is_alive = false #add end screen
@@ -136,3 +138,11 @@ func _on_deal_attack_timer_timeout() -> void:
 	$deal_attack_timer.stop()
 	Global.player_current_attack = false
 	attack_ip = false
+
+func current_camera():
+	if Global.current_scene == "world":
+		$world_camera.enabled = true
+		$northworld_camera.enabled = false
+	elif Global.current_scene == "northworld":
+		$northworld_camera.enabled = true
+		$world_camera.enabled = false
