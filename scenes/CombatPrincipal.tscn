@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://ccv47sfrr07hd"]
+
+[ext_resource type="Script" uid="uid://ya1bal3dmlkl" path="res://scenes/combat_principal.gd" id="1_6cetw"]
+
+[node name="Node2D" type="Node2D" unique_id=703843571]
+script = ExtResource("1_6cetw")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1655832353]
+
+[node name="Positions" type="Node2D" parent="." unique_id=2036155139]
+
+[node name="PlayerPos" type="Marker2D" parent="Positions" unique_id=1083831867]
+
+[node name="EnemyPos" type="Marker2D" parent="Positions" unique_id=929572842]
+
+[node name="CombatUI" type="CanvasLayer" parent="." unique_id=1819341700]
+
+[node name="ActionMenu" type="VBoxContainer" parent="CombatUI" unique_id=271023681]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BattleLog" type="Label" parent="CombatUI" unique_id=1641888682]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="HPBars" type="Control" parent="CombatUI" unique_id=871166355]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
