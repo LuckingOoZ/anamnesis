@@ -5,6 +5,8 @@ var player_chase = false
 var player = null
 
 var health = 100
+var attack_power = 20
+var combat_name = "Slime"
 var player_in_attack_zone = false
 var can_take_damage = true
 

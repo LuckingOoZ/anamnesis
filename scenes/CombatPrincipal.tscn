@@ -5,26 +5,65 @@
 [node name="Node2D" type="Node2D" unique_id=703843571]
 script = ExtResource("1_6cetw")
 
-[node name="Background" type="Sprite2D" parent="." unique_id=1655832353]
+[node name="Background" type="ColorRect" parent="." unique_id=1655832353]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.2, 0.2, 0.3, 1.0)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1023456789]
+position = Vector2(320, 180)
+zoom = Vector2(0.5, 0.5)
+enabled = true
 
 [node name="Positions" type="Node2D" parent="." unique_id=2036155139]
+position = Vector2(0, 0)
 
 [node name="PlayerPos" type="Marker2D" parent="Positions" unique_id=1083831867]
+position = Vector2(100, 280)
 
 [node name="EnemyPos" type="Marker2D" parent="Positions" unique_id=929572842]
+position = Vector2(540, 80)
 
 [node name="CombatUI" type="CanvasLayer" parent="." unique_id=1819341700]
 
-[node name="ActionMenu" type="VBoxContainer" parent="CombatUI" unique_id=271023681]
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="BattleLog" type="Label" parent="CombatUI" unique_id=1641888682]
-offset_right = 40.0
-offset_bottom = 23.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -200.0
+offset_top = 15.0
+offset_right = 200.0
+offset_bottom = 60.0
+text = "Un ennemi approche !"
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_minimum_size = Vector2(400, 50)
+theme_override_font_sizes/font_size = 28
+
+[node name="ActionMenu" type="VBoxContainer" parent="CombatUI" unique_id=271023681]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -90.0
+offset_right = 100.0
+offset_bottom = -10.0
+custom_minimum_size = Vector2(200, 80)
 
 [node name="HPBars" type="Control" parent="CombatUI" unique_id=871166355]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -300.0
+offset_right = 150.0
+offset_bottom = -120.0

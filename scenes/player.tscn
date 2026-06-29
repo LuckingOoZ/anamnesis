@@ -445,14 +445,14 @@ shape = SubResource("CircleShape2D_qhqgy")
 wait_time = 0.5
 
 [node name="world_camera" type="Camera2D" parent="." unique_id=1609916216]
-zoom = Vector2(4, 4)
+zoom = Vector2(2, 2)
 limit_left = 0
 limit_top = 0
 limit_right = 415
 limit_bottom = 367
 
 [node name="northworld_camera" type="Camera2D" parent="." unique_id=1114836295]
-zoom = Vector2(4, 4)
+zoom = Vector2(2, 2)
 limit_left = 0
 limit_top = 0
 limit_right = 335

@@ -5,15 +5,19 @@ var enemy_attack_cooldown = true
 var health = 100
 var player_is_alive = true
 var can_take_damage = true
+var attack_power = 20
+var combat_name = "Joueur"
 
 var attack_ip = false
-
+var current_enemy: Node2D = null
+var combat_started = false
 
 const speed = 100
 var current_dir = "none"
 
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
+
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -95,18 +99,21 @@ func player():
 func _on_player_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("enemy"):
 		enemy_in_attack_range = true
+		current_enemy = body
 
 
 func _on_player_hitbox_body_exited(body: Node2D) -> void:
 	if body.has_method("enemy"):
 		enemy_in_attack_range = false
+		if body == current_enemy:
+			current_enemy = null
 
 func enemy_attack():
-	if enemy_in_attack_range and enemy_attack_cooldown:
-		health = health - 20
+	if enemy_in_attack_range and enemy_attack_cooldown and current_enemy != null and not combat_started:
 		enemy_attack_cooldown = false
+		combat_started = true
 		$attack_cooldown.start()
-		print(health)
+		Global.start_combat(self, current_enemy)
 
 
 func _on_attack_cooldown_timeout() -> void:
@@ -116,6 +123,11 @@ func attack():
 	var dir = current_dir
 	
 	if Input.is_action_just_pressed("attack"):
+		if current_enemy != null and not combat_started:
+			combat_started = true
+			Global.start_combat(self, current_enemy)
+			return
+
 		Global.player_current_attack = true
 		attack_ip = true
 		if dir=="right":
