@@ -147,12 +147,14 @@ func check_battle_status(next_turn):
 		battle_log.text = "Victoire !"
 		if enemy_sprite != null:
 			enemy_sprite.visible = false
+		Global.combat_won = true
 		await get_tree().create_timer(1.5).timeout
 		return_to_map()
 	elif player_stats.hp <= 0:
 		battle_log.text = "Défaite..."
 		if player_sprite != null:
 			player_sprite.visible = false
+		Global.combat_won = false
 		await get_tree().create_timer(1.5).timeout
 		return_to_map()
 	else:

@@ -18,11 +18,42 @@ var current_dir = "none"
 func _ready():
 	$AnimatedSprite2D.play("front_idle")
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_SPACE:
+			# Start combat if near enemy
+			if current_enemy != null and not combat_started:
+				combat_started = true
+				Global.start_combat(self, current_enemy)
+			# Otherwise, do a normal attack
+			else:
+				attack_action()
+			get_tree().get_root().set_input_as_handled()
+
+func attack_action():
+	var dir = current_dir
+	Global.player_current_attack = true
+	attack_ip = true
+	if dir=="right":
+		$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.play("side_attack")
+		$deal_attack_timer.start()
+	if dir=="left":
+		$AnimatedSprite2D.flip_h = true
+		$AnimatedSprite2D.play("side_attack")
+		$deal_attack_timer.start()
+	if dir=="down":
+		$AnimatedSprite2D.play("front_attack")
+		$deal_attack_timer.start()
+	if dir=="up":
+		$AnimatedSprite2D.play("back_attack")
+		$deal_attack_timer.start()
+
+
 
 func _physics_process(delta):
 	player_movement(delta)
 	enemy_attack()
-	attack()
 	current_camera()
 	
 	if health<=0:
@@ -118,33 +149,6 @@ func enemy_attack():
 
 func _on_attack_cooldown_timeout() -> void:
 	enemy_attack_cooldown = true
-
-func attack():
-	var dir = current_dir
-	
-	if Input.is_action_just_pressed("attack"):
-		if current_enemy != null and not combat_started:
-			combat_started = true
-			Global.start_combat(self, current_enemy)
-			return
-
-		Global.player_current_attack = true
-		attack_ip = true
-		if dir=="right":
-			$AnimatedSprite2D.flip_h = false
-			$AnimatedSprite2D.play("side_attack")
-			$deal_attack_timer.start()
-		if dir=="left":
-			$AnimatedSprite2D.flip_h = true
-			$AnimatedSprite2D.play("side_attack")
-			$deal_attack_timer.start()
-		if dir=="down":
-			$AnimatedSprite2D.play("front_attack")
-			$deal_attack_timer.start()
-		if dir=="up":
-			$AnimatedSprite2D.play("back_attack")
-			$deal_attack_timer.start()
-
 
 func _on_deal_attack_timer_timeout() -> void:
 	$deal_attack_timer.stop()

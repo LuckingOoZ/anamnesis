@@ -15,6 +15,11 @@ var pending_player_data: CharacterData = null
 var pending_enemy_data: CharacterData = null
 var combat_scene_path = "res://scenes/CombatPrincipal.tscn"
 
+# Position sauvegardée avant le combat
+var saved_player_position: Vector2 = Vector2.ZERO
+var combat_won = false
+var defeated_enemy_node: Node = null
+
 
 func finish_changing_scene():
 	if transition_scene == true:
@@ -42,6 +47,11 @@ func change_scene():
 func start_combat(player_node: Node, enemy_node: Node) -> void:
 	if player_node == null or enemy_node == null:
 		return
+
+	# Save player position and enemy reference before combat
+	saved_player_position = player_node.position
+	defeated_enemy_node = enemy_node
+	combat_won = false
 
 	var player_data := CharacterData.new()
 	player_data.name = player_node.combat_name

@@ -10,6 +10,13 @@ func _ready() -> void:
 		$player.position.x = Global.player_exit_northworld_posx
 		$player.position.y = Global.player_exit_northworld_posy
 	
+	# Restore position after combat if won
+	if Global.combat_won:
+		$player.position = Global.saved_player_position
+		# Remove defeated enemy
+		if Global.defeated_enemy_node != null and not Global.defeated_enemy_node.is_queued_for_deletion():
+			Global.defeated_enemy_node.queue_free()
+	
 	# Re-enable player cameras
 	if $player.has_node("world_camera"):
 		$player.get_node("world_camera").enabled = true
